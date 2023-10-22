@@ -2,6 +2,7 @@ package com.example.ntpklocka;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -45,17 +46,20 @@ public class MainActivity extends AppCompatActivity {
                     public void onTimeResponse(String rawDate, Date date, Exception ex) {
 
                         if(date == null){
-                            SimpleDateFormat sdf = new SimpleDateFormat("'\nTime\n'HH:mm:ss");
+                            SimpleDateFormat sdf = new SimpleDateFormat("'\n'HH:mm:ss");
                             String currentDateAndTime = sdf.format(new Date());
                             textView.setText(currentDateAndTime);
+                            textView.setTextColor(Color.RED);
                             System.out.println(rawDate);
                             System.out.println("Offline, systemtid");
+
 
                         } else {
 
                             SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm:ss");
                             String ntimeString = timeFormat.format(date);
                             textView.setText(ntimeString);
+                            textView.setTextColor(Color.MAGENTA);
                             System.out.println(rawDate);
                             System.out.println("Online, ntpTid");
                         }
