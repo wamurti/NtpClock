@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.text.SimpleDateFormat;
 
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = findViewById(R.id.vyn);
 
 
-                SNTPClient.getDate(TimeZone.getTimeZone("Asia/Tokyo"), new SNTPClient.Listener(){
+                SNTPClient.getDate(TimeZone.getTimeZone("Europe/Stockholm"), new SNTPClient.Listener(){
 
                     @Override
                     public void onTimeResponse(String rawDate, Date date, Exception ex) {
@@ -55,12 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         } else {
-
-                            SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm:ss");
-                            String ntimeString = rawDate.substring(11,19);
-
-                            textView.setText(ntimeString);
-                            textView.setTextColor(Color.MAGENTA);
+                            String ntpTime = rawDate.substring(11,19);
+                            textView.setText(ntpTime);
+                            textView.setTextColor(Color.GREEN);
                             System.out.println(rawDate);
                             System.out.println("Online, ntpTid");
                         }
