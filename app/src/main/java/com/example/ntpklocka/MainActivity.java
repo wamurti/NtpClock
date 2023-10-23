@@ -40,15 +40,15 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = findViewById(R.id.vyn);
 
 
-                SNTPClient.getDate(TimeZone.getTimeZone("Europe/Stockholm"), new SNTPClient.Listener(){
+                SNTPClient.getDate(TimeZone.getTimeZone("Asia/Tokyo"), new SNTPClient.Listener(){
 
                     @Override
                     public void onTimeResponse(String rawDate, Date date, Exception ex) {
 
                         if(date == null){
-                            SimpleDateFormat sdf = new SimpleDateFormat("'\n'HH:mm:ss");
-                            String currentDateAndTime = sdf.format(new Date());
-                            textView.setText(currentDateAndTime);
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                            String currentSystemDateAndTime = sdf.format(new Date());
+                            textView.setText(currentSystemDateAndTime);
                             textView.setTextColor(Color.RED);
                             System.out.println(rawDate);
                             System.out.println("Offline, systemtid");
@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                         } else {
 
                             SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm:ss");
-                            String ntimeString = timeFormat.format(date);
+                            String ntimeString = rawDate.substring(11,19);
+
                             textView.setText(ntimeString);
                             textView.setTextColor(Color.MAGENTA);
                             System.out.println(rawDate);
